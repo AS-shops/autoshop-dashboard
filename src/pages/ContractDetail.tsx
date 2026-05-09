@@ -54,7 +54,7 @@ const ContractDetail = () => {
         <div className={styles.cardHeader}>
           <span className={styles.contractId}>Contract #{contract.id}</span>
           <span className={styles.contractDate}>
-            {formatDate(contract.timestamp)}
+            {contract.createdAt ? formatDate(contract.createdAt) : "N/A"}
           </span>
         </div>
 
