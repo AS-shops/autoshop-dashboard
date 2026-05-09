@@ -1,0 +1,240 @@
+.contractList {
+  width: 100%;
+}
+
+.pageHeader {
+  margin-bottom: 25px;
+}
+
+.pageHeader h1 {
+  margin: 0 0 8px 0;
+  font-size: 28px;
+  color: #1e3a5f;
+}
+
+.pageHeader p {
+  margin: 0;
+  color: #888;
+}
+
+.searchBar {
+  margin-bottom: 20px;
+}
+
+.searchBar input {
+  width: 100%;
+  padding: 12px 15px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.searchBar input:focus {
+  outline: none;
+  border-color: #2d5a87;
+}
+
+.contractsTable {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  width: 100%;
+}
+
+.tableHeader {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 0.8fr 1fr 0.7fr 0.8fr 1fr 0.6fr;
+  padding: 14px 20px;
+  background: linear-gradient(135deg, #1e3a5f 0%, #2d5a87 100%);
+  color: white;
+  font-weight: 600;
+  font-size: 13px;
+  gap: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.tableBody {
+  max-height: 600px;
+  overflow-y: auto;
+}
+
+.tableRow {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 0.8fr 1fr 0.7fr 0.8fr 1fr 0.6fr;
+  padding: 14px 20px;
+  border-bottom: 1px solid #f0f0f0;
+  align-items: center;
+  font-size: 14px;
+  gap: 8px;
+  transition: background 0.15s;
+}
+
+.tableRow:hover {
+  background: #f0f5fa;
+}
+
+.tableRow:last-child {
+  border-bottom: none;
+}
+
+.tableRow:nth-child(even) {
+  background: #fafbfc;
+}
+
+.tableRow:nth-child(even):hover {
+  background: #f0f5fa;
+}
+
+.colName {
+  font-weight: 600;
+  color: #1e3a5f;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.colBusiness {
+  color: #555;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.colPosition {
+  color: #666;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.colPhone {
+  font-family: "Segoe UI", monospace;
+  color: #444;
+  font-size: 13px;
+}
+
+.colPlan {
+  color: #333;
+}
+
+.planBadge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.planBasic {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.planPremium {
+  background: #e3f2fd;
+  color: #1565c0;
+}
+
+.planInvestment {
+  background: #fff3e0;
+  color: #e65100;
+}
+
+.colStartDate {
+  color: #555;
+  font-size: 13px;
+}
+
+.colDate {
+  color: #888;
+  font-size: 12px;
+}
+
+.colAction {
+  text-align: center;
+}
+
+.viewBtn {
+  display: inline-block;
+  padding: 6px 16px;
+  background: #2d5a87;
+  color: white;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.viewBtn:hover {
+  background: #1e3a5f;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(30, 58, 95, 0.3);
+}
+
+.noContracts {
+  padding: 50px;
+  text-align: center;
+  color: #999;
+  font-size: 15px;
+}
+
+.loading {
+  text-align: center;
+  padding: 50px;
+  color: #888;
+}
+
+.totalCount {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  font-size: 14px;
+  color: #666;
+}
+
+.totalCount span {
+  font-weight: 600;
+  color: #1e3a5f;
+}
+
+@media (max-width: 1100px) {
+  .tableHeader {
+    display: none;
+  }
+
+  .tableBody {
+    max-height: none;
+  }
+
+  .tableRow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 16px;
+    padding: 16px 20px;
+  }
+
+  .colName {
+    width: 100%;
+    font-size: 15px;
+    white-space: normal;
+  }
+
+  .colBusiness,
+  .colPosition,
+  .colPhone,
+  .colPlan,
+  .colStartDate,
+  .colDate {
+    white-space: normal;
+  }
+
+  .colAction {
+    margin-left: auto;
+  }
+}
