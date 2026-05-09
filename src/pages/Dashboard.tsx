@@ -41,7 +41,7 @@ const Dashboard = () => {
     <div className={styles.dashboard}>
       <div className={styles.pageHeader}>
         <h1>Dashboard</h1>
-        <p>Welcome to OTAS Tech Solutions Contract Management</p>
+        <p>Welcome to AutoShop Contract Management</p>
       </div>
 
       <div className={styles.statsGrid}>

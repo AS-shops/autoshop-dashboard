@@ -1,26 +1,27 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 const Login: React.FC = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  
+  const [showPassword, setShowPassword] = useState(false);
+
   const { login } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError('');
+    setError("");
     setLoading(true);
 
     try {
       await login({ username, password });
-      navigate('/');
+      navigate("/");
     } catch (err: any) {
-      setError(err.response?.data?.error || 'Login failed. Please try again.');
+      setError(err.response?.data?.error || "Login failed. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -31,14 +32,10 @@ const Login: React.FC = () => {
       <div style={styles.card}>
         <h1 style={styles.title}>AutoShop E-Sign</h1>
         <h2 style={styles.subtitle}>Dashboard Login</h2>
-        
+
         <form onSubmit={handleSubmit} style={styles.form}>
-          {error && (
-            <div style={styles.error}>
-              {error}
-            </div>
-          )}
-          
+          {error && <div style={styles.error}>{error}</div>}
+
           <div style={styles.inputGroup}>
             <label style={styles.label}>Username</label>
             <input
@@ -54,15 +51,25 @@ const Login: React.FC = () => {
 
           <div style={styles.inputGroup}>
             <label style={styles.label}>Password</label>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              style={styles.input}
-              placeholder="Enter password"
-              autoComplete="current-password"
-            />
+            <div style={styles.passwordWrapper}>
+              <input
+                type={showPassword ? "text" : "password"}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                style={styles.passwordInput}
+                placeholder="Enter password"
+                autoComplete="current-password"
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                style={styles.toggleButton}
+                aria-label={showPassword ? "Hide password" : "Show password"}
+              >
+                {showPassword ? "👁️" : "👁️‍🗨️"}
+              </button>
+            </div>
           </div>
 
           <button
@@ -71,10 +78,10 @@ const Login: React.FC = () => {
             style={{
               ...styles.button,
               opacity: loading ? 0.6 : 1,
-              cursor: loading ? 'not-allowed' : 'pointer'
+              cursor: loading ? "not-allowed" : "pointer",
             }}
           >
-            {loading ? 'Logging in...' : 'Login'}
+            {loading ? "Logging in..." : "Login"}
           </button>
         </form>
 
@@ -88,84 +95,113 @@ const Login: React.FC = () => {
 
 const styles: { [key: string]: React.CSSProperties } = {
   container: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    minHeight: '100vh',
-    backgroundColor: '#f5f5f5',
-    padding: '20px',
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    minHeight: "100vh",
+    backgroundColor: "#f5f5f5",
+    padding: "20px",
   },
   card: {
-    backgroundColor: 'white',
-    borderRadius: '8px',
-    boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
-    padding: '40px',
-    width: '100%',
-    maxWidth: '400px',
+    backgroundColor: "white",
+    borderRadius: "8px",
+    boxShadow: "0 2px 10px rgba(0,0,0,0.1)",
+    padding: "40px",
+    width: "100%",
+    maxWidth: "400px",
   },
   title: {
-    fontSize: '24px',
-    fontWeight: 'bold',
-    textAlign: 'center',
-    marginBottom: '8px',
-    color: '#333',
+    fontSize: "24px",
+    fontWeight: "bold",
+    textAlign: "center",
+    marginBottom: "8px",
+    color: "#333",
   },
   subtitle: {
-    fontSize: '18px',
-    textAlign: 'center',
-    marginBottom: '30px',
-    color: '#666',
+    fontSize: "18px",
+    textAlign: "center",
+    marginBottom: "30px",
+    color: "#666",
   },
   form: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '20px',
+    display: "flex",
+    flexDirection: "column",
+    gap: "20px",
   },
   inputGroup: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '8px',
+    display: "flex",
+    flexDirection: "column",
+    gap: "8px",
   },
   label: {
-    fontSize: '14px',
-    fontWeight: '500',
-    color: '#333',
+    fontSize: "14px",
+    fontWeight: "500",
+    color: "#333",
   },
   input: {
-    padding: '12px',
-    fontSize: '14px',
-    border: '1px solid #ddd',
-    borderRadius: '4px',
-    outline: 'none',
-    transition: 'border-color 0.3s',
+    padding: "12px",
+    fontSize: "14px",
+    border: "1px solid #ddd",
+    borderRadius: "4px",
+    outline: "none",
+    transition: "border-color 0.3s",
+  },
+  passwordWrapper: {
+    position: "relative",
+    display: "flex",
+    alignItems: "center",
+  },
+  passwordInput: {
+    padding: "12px",
+    paddingRight: "45px",
+    fontSize: "14px",
+    border: "1px solid #ddd",
+    borderRadius: "4px",
+    outline: "none",
+    transition: "border-color 0.3s",
+    width: "100%",
+  },
+  toggleButton: {
+    position: "absolute",
+    right: "10px",
+    background: "none",
+    border: "none",
+    cursor: "pointer",
+    fontSize: "18px",
+    padding: "5px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    opacity: 0.6,
+    transition: "opacity 0.2s",
   },
   button: {
-    padding: '12px',
-    fontSize: '16px',
-    fontWeight: '600',
-    color: 'white',
-    backgroundColor: '#007bff',
-    border: 'none',
-    borderRadius: '4px',
-    cursor: 'pointer',
-    transition: 'background-color 0.3s',
-    marginTop: '10px',
+    padding: "12px",
+    fontSize: "16px",
+    fontWeight: "600",
+    color: "white",
+    backgroundColor: "#007bff",
+    border: "none",
+    borderRadius: "4px",
+    cursor: "pointer",
+    transition: "background-color 0.3s",
+    marginTop: "10px",
   },
   error: {
-    padding: '12px',
-    backgroundColor: '#fee',
-    color: '#c33',
-    borderRadius: '4px',
-    fontSize: '14px',
-    textAlign: 'center',
+    padding: "12px",
+    backgroundColor: "#fee",
+    color: "#c33",
+    borderRadius: "4px",
+    fontSize: "14px",
+    textAlign: "center",
   },
   footer: {
-    marginTop: '20px',
-    textAlign: 'center',
+    marginTop: "20px",
+    textAlign: "center",
   },
   footerText: {
-    fontSize: '12px',
-    color: '#999',
+    fontSize: "12px",
+    color: "#999",
   },
 };
 

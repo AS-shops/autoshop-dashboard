@@ -31,7 +31,7 @@ export const contractService = {
   // Get all contracts (requires authentication)
   getAll: async (): Promise<Contract[]> => {
     const response = await axiosInstance.get<Contract[]>("/contracts");
-    return response.data;
+    return response.data.reverse();
   },
 
   // Get contract by ID (requires authentication)

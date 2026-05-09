@@ -56,6 +56,10 @@
   letter-spacing: 0.5px;
 }
 
+.tableHeader span {
+  color: white;
+}
+
 .tableBody {
   max-height: 600px;
   overflow-y: auto;
